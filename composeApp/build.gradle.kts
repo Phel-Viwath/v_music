@@ -18,14 +18,16 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-            isStatic = true
+
+    if (isMacOs) {
+        listOf(
+            iosArm64(),
+            iosSimulatorArm64()
+        ).forEach { iosTarget ->
+            iosTarget.binaries.framework {
+                baseName = "ComposeApp"
+                isStatic = true
+            }
         }
     }
     
@@ -106,7 +108,20 @@ room3{
     schemaDirectory("$projectDir/schemas")
 }
 
+configurations.configureEach {
+    resolutionStrategy {
+        force("org.jetbrains:annotations:23.0.0")
+    }
+    exclude(group = "com.intellij", module = "annotations")
+}
+
 dependencies {
     debugImplementation(libs.compose.uiTooling)
+
+    if (isMacOs) {
+        add("kspIosSimulatorArm64", libs.androidx.room3.compiler)
+        add("kspIosX64", libs.androidx.room3.compiler)
+        add("kspIosArm64", libs.androidx.room3.compiler)
+    }
 }
 

@@ -23,6 +23,7 @@ abstract class MusicDatabase : RoomDatabase() {
 }
 
 // Room generates the actual implementations
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 expect object MusicDatabaseConstructor : RoomDatabaseConstructor<MusicDatabase> {
     override fun initialize(): MusicDatabase
 }
