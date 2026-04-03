@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.resources.painterResource
 import v_music.shared.generated.resources.Res
 import v_music.shared.generated.resources.compose_multiplatform
+import v_music.shared.generated.resources.v_music_icon
 
 
 @Composable
@@ -40,7 +41,7 @@ fun App() {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Image(painterResource(Res.drawable.v_music_icon), null)
                     Text("Compose: $greeting")
                 }
             }

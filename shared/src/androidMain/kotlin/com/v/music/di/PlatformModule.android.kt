@@ -19,4 +19,7 @@ actual fun platformModule() = module {
     single<PlatformMediaManager> {
         AndroidMediaManager(androidContext())
     }
+
+    single { AndroidMusicPlayer(androidContext()) }
+    single<MusicPlayer> { get<AndroidMusicPlayer>() }
 }

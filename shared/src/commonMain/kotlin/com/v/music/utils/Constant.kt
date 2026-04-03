@@ -1,0 +1,14 @@
+package com.v.music.utils
+
+object Constant {
+    const val PLAYLIST_ID = "playlistId"
+
+    const val NOTIFICATION_ID = 1
+    const val CHANNEL_ID = "music_playback_channel"
+    const val ACTION_PLAY = "ACTION_PLAY"
+    const val ACTION_PAUSE = "ACTION_PAUSE"
+    const val ACTION_NEXT = "ACTION_NEXT"
+    const val ACTION_PREVIOUS = "ACTION_PREVIOUS"
+    const val ACTION_STOP = "ACTION_STOP"
+
+}

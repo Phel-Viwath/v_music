@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeCompiler)
+
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
@@ -79,11 +81,16 @@ dependencies {
     implementation(libs.coil.network.ktor)
 
     implementation(libs.androidx.room3.runtime)
-    implementation(libs.androidx.room3.compiler)
     implementation(libs.androidx.sqlite.bundled)
+    ksp(libs.androidx.room3.compiler)
 
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
+
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media)
 
     implementation(projects.shared)
 }
