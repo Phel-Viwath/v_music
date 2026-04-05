@@ -250,6 +250,8 @@ class MusicService : Service() {
     }
 
     inner class MusicBinder : Binder() {
+        // The connection reads this to get the MusicPlayer interface
+        fun getPlayer(): MusicPlayer = musicPlayer
         fun getService(): MusicService = this@MusicService
     }
 }

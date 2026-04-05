@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class AndroidMusicPlayer(
-    private val context: Context
+    context: Context
 ) : MusicPlayer {
 
     private val exoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()

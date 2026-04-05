@@ -26,18 +26,31 @@ kotlin {
         androidResources.enable = true
     }
 
-    if (isMacOs) {
-        listOf(
-            iosArm64(),
-            iosSimulatorArm64()
-        ).forEach { iosTarget ->
-            iosTarget.binaries.framework {
-                baseName = "Shared"
-                isStatic = true
-            }
+//    if (isMacOs) {
+//        listOf(
+//            iosArm64(),
+//            iosSimulatorArm64()
+//        ).forEach { iosTarget ->
+//            iosTarget.binaries.framework {
+//                baseName = "Shared"
+//                isStatic = true
+//            }
+//        }
+//    }
+    listOf(
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "Shared"
+            isStatic = true
         }
     }
-    
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
+    }
+
     sourceSets {
 
         androidMain.dependencies {
@@ -110,10 +123,13 @@ configurations.configureEach {
 dependencies {
     androidRuntimeClasspath(libs.compose.uiTooling)
     add("kspAndroid", libs.androidx.room3.compiler)
-    if (isMacOs) {
-        add("kspIosSimulatorArm64", libs.androidx.room3.compiler)
-        add("kspIosX64", libs.androidx.room3.compiler)
-        add("kspIosArm64", libs.androidx.room3.compiler)
-    }
+//    if (isMacOs) {
+//        add("kspIosSimulatorArm64", libs.androidx.room3.compiler)
+//        add("kspIosX64", libs.androidx.room3.compiler)
+//        add("kspIosArm64", libs.androidx.room3.compiler)
+//    }
+    add("kspIosSimulatorArm64", libs.androidx.room3.compiler)
+   // add("kspIosX64", libs.androidx.room3.compiler)
+    add("kspIosArm64", libs.androidx.room3.compiler)
 }
 

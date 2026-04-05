@@ -4,24 +4,24 @@ import com.v.music.domain.model.Music
 import com.v.music.domain.repository.MusicRepository
 import com.v.music.utils.DeleteResult
 import com.v.music.utils.MusicDeletionResult
-import com.v.music.utils.Resource
+import com.v.music.utils.Resources
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class DeleteMusicsUseCase (
     private val repository: MusicRepository
 ) {
-    operator fun invoke(music: Music): Flow<Resource<DeleteResult>> = flow {
-        emit(Resource.Loading())
+    operator fun invoke(music: Music): Flow<Resources<DeleteResult>> = flow {
+        emit(Resources.Loading())
         try {
             when (val result = repository.getDeletePermissionIntent(music)) {
                 is MusicDeletionResult.RequiresPermission -> {
-                    emit(Resource.Success(DeleteResult.NeedPermission(result.platformIntent)))
+                    emit(Resources.Success(DeleteResult.NeedPermission(result.platformIntent)))
                     return@flow
                 }
 
                 is MusicDeletionResult.Failure -> {
-                    emit(Resource.Error(result.error))
+                    emit(Resources.Error(result.error))
                     return@flow
                 }
 
@@ -32,27 +32,27 @@ class DeleteMusicsUseCase (
 
             val deletedRows = repository.deleteMusic(music)
             if (deletedRows > 0) {
-                emit(Resource.Success(DeleteResult.Success))
+                emit(Resources.Success(DeleteResult.Success))
             } else {
-                emit(Resource.Error("Failed to delete music"))
+                emit(Resources.Error("Failed to delete music"))
             }
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Unknown error"))
+            emit(Resources.Error(e.message ?: "Unknown error"))
         }
     }
 
     // Direct delete after permission granted
-    fun executeDelete(music: Music): Flow<Resource<DeleteResult>> = flow {
-        emit(Resource.Loading())
+    fun executeDelete(music: Music): Flow<Resources<DeleteResult>> = flow {
+        emit(Resources.Loading())
         try {
             val deletedRows = repository.deleteMusic(music)
             if (deletedRows > 0) {
-                emit(Resource.Success(DeleteResult.Success))
+                emit(Resources.Success(DeleteResult.Success))
             } else {
-                emit(Resource.Error("Failed to delete music"))
+                emit(Resources.Error("Failed to delete music"))
             }
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Unknown error"))
+            emit(Resources.Error(e.message ?: "Unknown error"))
         }
     }
 

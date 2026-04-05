@@ -5,6 +5,9 @@ import com.v.music.data.local.AndroidMediaManager
 import com.v.music.data.local.MusicDatabase
 import com.v.music.data.local.PlatformMediaManager
 import com.v.music.data.local.getDatabaseBuilder
+import com.v.music.domain.service.AndroidMusicPlayer
+import com.v.music.domain.service.MusicPlayer
+import com.v.music.domain.service.MusicServiceConnection
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -22,4 +25,6 @@ actual fun platformModule() = module {
 
     single { AndroidMusicPlayer(androidContext()) }
     single<MusicPlayer> { get<AndroidMusicPlayer>() }
+
+    single { MusicServiceConnection(androidContext()) }
 }
