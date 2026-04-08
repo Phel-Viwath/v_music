@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.resources.painterResource
 import v_music.shared.generated.resources.Res
-import v_music.shared.generated.resources.compose_multiplatform
 import v_music.shared.generated.resources.v_music_icon
 
 

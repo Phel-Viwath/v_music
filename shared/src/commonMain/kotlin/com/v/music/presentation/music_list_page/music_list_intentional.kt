@@ -1,9 +1,16 @@
 package com.v.music.presentation.music_list_page
 
+import androidx.compose.runtime.compositionLocalOf
 import com.v.music.domain.model.Music
+import com.v.music.domain.model.PlaybackStates
 import com.v.music.domain.model.SortOrder
+import kotlinx.coroutines.flow.StateFlow
 
 interface MusicListPageIntent {
+
+    val state: StateFlow<MusicListState>
+
+    val playbackState: StateFlow<PlaybackStates>
 
     fun onHandleIntent(intent: Intent)
 
@@ -43,4 +50,8 @@ interface MusicListPageIntent {
          */
         data object OnDeletePermissionGranted : Intent()
     }
+}
+
+val LocalMusicListIntentional = compositionLocalOf<MusicListPageIntent> {
+    error("No music list local provide")
 }

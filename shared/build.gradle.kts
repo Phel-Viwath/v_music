@@ -98,6 +98,8 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+
+            implementation(libs.kotlinx.datetime)
         }
 
         commonTest.dependencies {
